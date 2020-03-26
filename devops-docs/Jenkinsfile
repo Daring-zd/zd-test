@@ -1,0 +1,20 @@
+library 'bizseer-ci'
+
+pipeline {
+  agent any
+  stages {
+    stage('build') {
+      steps {
+        sh "docker run --rm  -v \$(pwd):/mkdocs docker.bizseer.com/bizseer/mkdocs:1.0.0 mkdocs build"
+        sh "sudo chown -R centos:centos site"
+      }
+    }
+    stage('deliver') {
+      steps {
+        withCredentials([file(credentialsId: 'bizseer-root-pem', variable: 'PEM_FILE')]) {
+            sh "scp -i $PEM_FILE -o StrictHostKeyChecking=no -r site/* centos@172.31.4.6:${env.DEVOPS_DOCS_PATH}/"
+          }
+      }
+    }
+  }
+}

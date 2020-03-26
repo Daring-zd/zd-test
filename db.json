@@ -1,0 +1,312 @@
+{
+    "packages": [{
+            "product": "platform",
+            "customer": "base",
+            "version": "dev",
+            "branches": {
+                "aiops-web": "dev",
+                "aiops-restapi": "dev",
+                "aiops-kraken": "dev",
+                "anomaly-core": "dev",
+                "overseer-core": "dev",
+                "fluxrank-core": "dev",
+                "carpenter-core": "dev"
+            },
+            "versions": {
+                "kafka": "0.10.2.2",
+                "elasticsearch": "6.5.4",
+                "neo4j": "3.5",
+                "mongdb": "4.0",
+                "influxdb": "1.7",
+                "redis": "5.0"
+            }
+        },
+        {
+            "product": "platform",
+            "customer": "base",
+            "version": "master",
+            "branches": {
+                "aiops-web": "master",
+                "aiops-restapi": "master",
+                "aiops-kraken": "master",
+                "anomaly-core": "master",
+                "overseer-core": "master",
+                "fluxrank-core": "master",
+                "carpenter-core": "master"
+            },
+            "versions": {
+                "kafka": "0.10.2.2",
+                "elasticsearch": "6.5.4",
+                "neo4j": "3.5",
+                "mongdb": "4.0",
+                "influxdb": "1.7",
+                "redis": "5.0"
+            }
+        },
+        {
+            "product": "platform",
+            "customer": "bcm",
+            "version": "master",
+            "branches": {
+                "aiops-web": "master",
+                "aiops-restapi": "master",
+                "aiops-kraken": "master",
+                "anomaly-core": "master",
+                "overseer-core": "bcm-master",
+                "fluxrank-core": "master",
+                "carpenter-core": "bcm-master"
+            },
+            "versions": {
+                "kafka": "0.10.2.2",
+                "elasticsearch": "6.5.4",
+                "neo4j": "3.5",
+                "mongdb": "4.0",
+                "influxdb": "1.7",
+                "redis": "5.0",
+                "spark": "2.3.2"
+            }
+        },
+        {
+            "product": "platform",
+            "customer": "bcm",
+            "version": "dev",
+            "branches": {
+                "aiops-web": "dev",
+                "aiops-restapi": "dev",
+                "aiops-kraken": "dev",
+                "anomaly-core": "dev",
+                "overseer-core": "bcm-dev",
+                "fluxrank-core": "dev",
+                "carpenter-core": "bcm-dev"
+            },
+            "versions": {
+                "kafka": "0.10.2.2",
+                "elasticsearch": "6.5.4",
+                "neo4j": "3.5",
+                "mongdb": "4.0",
+                "influxdb": "1.7",
+                "redis": "5.0",
+                "spark": "2.3.2"
+            }
+        },
+        {
+            "product": "platform",
+            "customer": "ceb",
+            "version": "dev",
+            "branches": {
+                "aiops-web": "dev",
+                "aiops-restapi": "ceb-dev",
+                "aiops-kraken": "dev",
+                "anomaly-core": "dev",
+                "overseer-core": "ceb-dev",
+                "fluxrank-core": "dev",
+                "carpenter-core": "ceb-dev"
+            },
+            "versions": {
+                "kafka": "0.10.2.2",
+                "elasticsearch": "7.4.0",
+                "neo4j": "3.5",
+                "mongdb": "4.0",
+                "influxdb": "1.7",
+                "redis": "5.0"
+            }
+        },
+        {
+            "product": "platform",
+            "customer": "ceb",
+            "version": "master",
+            "branches": {
+                "aiops-web": "master",
+                "aiops-restapi": "ceb-master",
+                "aiops-kraken": "master",
+                "anomaly-core": "master",
+                "overseer-core": "ceb-master",
+                "fluxrank-core": "master",
+                "carpenter-core": "ceb-master"
+            },
+            "versions": {
+                "kafka": "0.10.2.2",
+                "elasticsearch": "7.4.0",
+                "neo4j": "3.5",
+                "mongdb": "4.0",
+                "influxdb": "1.7",
+                "redis": "5.0"
+            }
+        },
+        {
+            "product": "standard",
+            "customer": "base",
+            "version": "master",
+            "branches": {
+                "anomaly-web": "master",
+                "anomaly-restapi": "master",
+                "anomaly-overseer": "master",
+                "anomaly-core": "standard-master",
+                "fluxrank-core": "standard-master",
+                "volcano-core": "standard-master",
+                "quoridor-core": "standard-dev"
+            },
+            "versions": {
+                "kafka": "0.10.2.2",
+                "elasticsearch": "6.5.4",
+                "neo4j": "3.5",
+                "mongdb": "4.0",
+                "influxdb": "1.7",
+                "redis": "5.0"
+            }
+        },
+        {
+            "product": "standard",
+            "customer": "base",
+            "version": "dev",
+            "branches": {
+                "anomaly-web": "dev",
+                "anomaly-restapi": "dev",
+                "anomaly-overseer": "dev",
+                "anomaly-core": "standard-dev",
+                "fluxrank-core": "standard-dev",
+                "quoridor-core": "standard-dev"
+            },
+            "versions": {
+                "kafka": "0.10.2.2",
+                "elasticsearch": "6.5.4",
+                "neo4j": "3.5",
+                "mongdb": "4.0",
+                "influxdb": "1.7",
+                "redis": "5.0"
+            }
+        },
+        {
+            "product": "standard",
+            "customer": "cmbc",
+            "version": "master",
+            "branches": {
+                "anomaly-web": "master",
+                "anomaly-restapi": "master",
+                "anomaly-overseer": "master",
+                "anomaly-core": "cmbc-master",
+                "fluxrank-core": "cmbc-master",
+                "volcano-core": "cmbc-master",
+                "quoridor-core": "standard-dev"
+            },
+            "versions": {
+                "kafka": "0.10.2.2",
+                "elasticsearch": "6.5.4",
+                "neo4j": "3.5",
+                "mongdb": "4.0",
+                "influxdb": "1.7",
+                "redis": "5.0"
+            }
+        },
+        {
+            "product": "standard",
+            "customer": "cmbc",
+            "version": "dev",
+            "branches": {
+                "anomaly-web": "dev",
+                "anomaly-restapi": "dev",
+                "anomaly-overseer": "dev",
+                "anomaly-core": "cmbc-dev",
+                "fluxrank-core": "cmbc-dev",
+                "quoridor-core": "standard-dev"
+            },
+            "versions": {
+                "kafka": "0.10.2.2",
+                "elasticsearch": "6.5.4",
+                "neo4j": "3.5",
+                "mongdb": "4.0",
+                "influxdb": "1.7",
+                "redis": "5.0"
+            }
+        },
+        {
+            "product": "standard",
+            "customer": "ceb",
+            "version": "dev",
+            "branches": {
+                "anomaly-web": "dev",
+                "anomaly-restapi": "dev",
+                "anomaly-overseer": "dev",
+                "anomaly-core": "ceb-dev",
+                "fluxrank-core": "ceb-dev"
+            },
+            "versions": {
+                "kafka": "0.10.2.2",
+                "elasticsearch": "6.5.4",
+                "neo4j": "3.5",
+                "mongdb": "4.0",
+                "influxdb": "1.7",
+                "redis": "5.0"
+            }
+        },
+        {
+            "product": "standard",
+            "customer": "ceb",
+            "version": "master",
+            "branches": {
+                "anomaly-web": "master",
+                "anomaly-restapi": "master",
+                "anomaly-overseer": "master",
+                "anomaly-core": "ceb-master",
+                "fluxrank-core": "ceb-master",
+                "volcano-core": "standard-master"
+            },
+            "versions": {
+                "kafka": "0.10.2.2",
+                "elasticsearch": "6.5.4",
+                "neo4j": "3.5",
+                "mongdb": "4.0",
+                "influxdb": "1.7",
+                "redis": "5.0"
+            }
+        },
+        {
+            "product": "standard",
+            "customer": "base",
+            "version": "4.x-dev",
+            "branches": {
+                "anomaly-web": "4.x-dev",
+                "anomaly-restapi": "4.x-dev",
+                "anomaly-overseer": "4.x-dev",
+                "anomaly-core": "4.x-dev",
+                "fluxrank-core": "standard-4.0-dev",
+                "carpenter-core": "standard-dev",
+                "volcano-core": "standard-4.x-dev"
+            },
+            "versions": {
+                "kafka": "0.10.2.2",
+                "elasticsearch": "6.5.4",
+                "neo4j": "3.5",
+                "mongdb": "4.0",
+                "influxdb": "1.7",
+                "redis": "5.0"
+            }
+        },
+        {
+            "product": "standard",
+            "customer": "base",
+            "version": "4.x-master",
+            "branches": {
+                "anomaly-web": "4.x-master",
+                "anomaly-restapi": "4.x-master",
+                "anomaly-overseer": "4.x-master",
+                "anomaly-core": "standard-base-4.x-master",
+                "fluxrank-core": "standard-4.0-master",
+                "carpenter-core": "standard-4.0-master",
+                "volcano-core": "standard-base-4.x-master",
+                "quoridor-core": "standard-base-4.x-master",
+                "atlas": "master",
+                "bizseer-kaptain": "master",
+                "bizseer-waterdrop": "master"
+            },
+            "versions": {
+                "kafka": "0.10.2.2",
+                "elasticsearch": "6.5.4",
+                "neo4j": "3.5",
+                "mongdb": "4.0",
+                "influxdb": "1.7",
+                "redis": "5.0"
+            }
+        }
+    ]
+}

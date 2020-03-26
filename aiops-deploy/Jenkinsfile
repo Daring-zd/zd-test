@@ -1,0 +1,38 @@
+library 'bizseer-ci'
+
+pipeline {
+  agent any
+  environment {
+    DINGTALK_TOKEN = credentials('dingding-deploy-user')
+  }
+  stages {
+    stage('Release') {
+      steps {
+        sh """
+        s3cmd put CHANGELOG.md \${AWS_S3_BIZSEER_RELEASE}/release/deploy/
+        rm -rf .git*
+        mkdir aiops-deploy-\${TAG_NAME}
+        mv * aiops-deploy-\${TAG_NAME}/ || true
+        zip -r aiops-deploy-\${TAG_NAME}.zip aiops-deploy-\${TAG_NAME}
+        s3cmd put aiops-deploy-\${TAG_NAME}.zip \${AWS_S3_BIZSEER_RELEASE}/release/deploy/
+        """
+      }
+    }
+  }
+  post {
+    success {
+      script {
+        echo "hello ding"
+        dingding("${env.DINGTALK_TOKEN}",
+          "# 新版本发布\n" +
+          "- 版本: ${env.TAG_NAME}\n" +
+          "- [点击](https://file.bizseer.com/api/download/release/deploy/aiops-deploy-${env.TAG_NAME}.zip)下载\n" +
+          "- 更新内容见[CHANGELOG.md](https://file.bizseer.com/files/release/deploy/CHANGELOG.md)",
+          "↑ @all",
+          [],
+          true
+        )
+      }
+    }
+  }
+}

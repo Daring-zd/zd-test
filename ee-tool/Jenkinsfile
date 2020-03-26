@@ -1,0 +1,15 @@
+library 'bizseer-ci'
+
+pipeline {
+  agent any
+  stages {
+    stage('Release') {
+      steps {
+        sh """
+        zip -r testenv_manager.zip testenv_manager
+        s3cmd put testenv_manager.zip \${AWS_S3_BIZSEER_RELEASE}/release/testenv/
+        """
+      }
+    }
+  }
+}

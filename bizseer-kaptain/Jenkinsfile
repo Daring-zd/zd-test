@@ -1,0 +1,3 @@
+library 'bizseer-ci'
+
+maven('kaptain-assembly/target/*.tar.gz')

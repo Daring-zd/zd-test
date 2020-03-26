@@ -1,0 +1,48 @@
+library 'bizseer-ci'
+
+pipeline {
+  agent any
+  environment {
+    DINGTALK_TOKEN = credentials('dingding-testenv-user')
+  }
+  stages {
+    stage('Release') {
+      steps {
+        sh """
+        s3cmd put CHANGELOG.md \${AWS_S3_BIZSEER_RELEASE}/release/testenv/CHANGELOG-\${BRANCH_NAME}.md
+        rm -rf .git*
+        dst=/tmp/aiops-testenv-\${BRANCH_NAME}
+        rm -rf \${dst}
+        mkdir -p \${dst}
+        mv * \${dst}/
+        mv .env \${dst}/
+        echo \${GIT_COMMIT} > \${dst}/.version
+        cd /tmp
+        if [[ -n \${TAG_NAME} ]]
+        then
+          echo "tag: \${TAG_NAME}" >> aiops-testenv-\${TAG_NAME}/.version
+        fi
+        zip -r aiops-testenv-\${BRANCH_NAME}.zip aiops-testenv-\${BRANCH_NAME}
+        s3cmd put aiops-testenv-\${BRANCH_NAME}.zip \${AWS_S3_BIZSEER_RELEASE}/release/testenv/
+        rm -rf \${dst}*
+        """
+      }
+    }
+  }
+  post {
+    success {
+      script {
+        echo "hello ding"
+        dingding("${env.DINGTALK_TOKEN}",
+          "# 新版本发布\n" +
+          "- 版本: ${env.TAG_NAME}\n" +
+          "- [点击](https://file.bizseer.com/api/download/release/testenv/aiops-testenv.zip)下载\n" +
+          "- 更新内容见[CHANGELOG.md](https://file.bizseer.com/files/release/testenv/CHANGELOG.md)",
+          "↑ @all",
+          [],
+          true
+        )
+      }
+    }
+  }
+}

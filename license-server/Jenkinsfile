@@ -1,0 +1,36 @@
+pipeline {
+  agent any
+  environment {
+    AWS_ACCESS_KEY_ID     = credentials('amazon-s3-access-key')
+    AWS_SECRET_ACCESS_KEY = credentials('amazon-s3-secret-key')
+    DINGTALK_BUILD_TOKEN = credentials('dingding-build')
+  }
+
+  stages {
+    stage('Test') {
+        steps {
+          sh """
+          pwd
+          env
+          """
+        }
+      }
+    stage('Build') {
+      steps {
+        sh """
+        make build
+        """
+      }
+    }
+    stage('Deliver') {
+      steps {
+        sh """
+        mkdir -p \$(\$(pwd)/bin/license-server -version | grep Version | awk -F \" \" '{print \$2}')
+        cp bin/license-server \$(\$(pwd)/bin/license-server -version | grep Version | awk -F \" \" '{print \$2}')/
+        tar -zcvf \$(\$(pwd)/bin/license-server -version | grep Version | awk -F \" \" '{print \$2}').tar.gz \$(\$(pwd)/bin/license-server -version | grep Version | awk -F \" \" '{print \$2}')
+        s3cmd put \$(\$(pwd)/bin/license-server -version | grep Version | awk -F \" \" '{print \$2}').tar.gz s3://bizseer-release/mirrors/license/server/
+        """
+      }
+    }
+  }
+}
