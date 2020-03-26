@@ -1,0 +1,49 @@
+pipeline {
+  agent any
+  environment {
+    AWS_ACCESS_KEY_ID     = credentials('amazon-s3-access-key')
+    AWS_SECRET_ACCESS_KEY = credentials('amazon-s3-secret-key')
+    DINGTALK_BUILD_TOKEN = credentials('dingding-build')
+  }
+
+  stages {
+    stage('Test') {
+        steps {
+          sh """
+          pwd
+          env
+          """
+        }
+      }
+    stage('Build') {
+      steps {
+        sh """
+        docker pull docker.bizseer.com/bizseer/gobuild-chsw:latest
+        docker run --rm -v \$(pwd):/go/src/github.com/chengshiwen/influx-proxy docker.bizseer.com/bizseer/gobuild-chsw "make linux"
+        """
+      }
+    }
+    stage('Deliver') {
+      steps {
+        sh """
+        sudo chown -R centos:centos *
+		    sudo chmod -R 777 *
+        mkdir -p influxdb
+        cp -r bin/influx-proxy ./influxdb/
+        cp -r proxy.json ./influxdb/
+        tar -zcvf influxdb-\$(bin/influx-proxy -version | grep Version | awk -F \" \" '{print \$2}').tar.gz influxdb
+        echo ${env.BRANCH_NAME}
+        if [[ ${env.BRANCH_NAME} = "master" ]]
+          then
+            s3cmd put influxdb-\$(bin/influx-proxy -version | grep Version | awk -F \" \" '{print \$2}').tar.gz s3://bizseer-release/mirrors/influxdb/binary/v1/formal/
+        elif [[ ${env.BRANCH_NAME} = "consistent" ]]
+          then
+            s3cmd put influxdb-\$(bin/influx-proxy -version | grep Version | awk -F \" \" '{print \$2}').tar.gz s3://bizseer-release/mirrors/influxdb/binary/v2/formal/
+        else
+            s3cmd put influxdb-\$(bin/influx-proxy -version | grep Version | awk -F \" \" '{print \$2}').tar.gz s3://bizseer-release/mirrors/influxdb/binary/other/formal/
+        fi
+        """
+      }
+    }
+  }
+}
